@@ -10,12 +10,24 @@
         font-family: 'Pixelify Sans', cursive;
         font-size: 80px;
         text-align: center;
+        @media screen and (max-width:600px) and (min-width:351px){
+            font-size: 50px;
+        }
+        @media screen and (max-width:350px) {
+            font-size: 30px;
+        }
     }
     .secondary_text{
         font-family: 'Montserrat', sans-serif;
         font-size: 18px;
         margin-top: 15px;
         text-align: center;
+        @media screen and (max-width:600px) and (min-width:351px){
+            font-size: 15px;
+        }
+        @media screen and (max-width:350px) {
+            font-size: 12px;
+        }
     }
 }
 

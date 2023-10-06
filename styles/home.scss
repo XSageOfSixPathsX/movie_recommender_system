@@ -15,4 +15,10 @@ body::-webkit-scrollbar {
     font-family: 'Montserrat', sans-serif;
     font-size: 30px;
     padding: 20px 30px 60px;
+    @media screen and (max-width:600px) and (min-width:351px){
+        font-size: 20px;
+    }
+    @media screen and (max-width:350px) {
+        font-size: 15px;
+    }
 }

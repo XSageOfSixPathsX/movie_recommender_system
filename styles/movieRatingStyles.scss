@@ -13,6 +13,12 @@
         font-family: 'Montserrat', sans-serif;
         font-size: 25px;
         padding-left: 30px;
+        @media screen and (max-width:600px) and (min-width:351px){
+            font-size: 15px;
+        }
+        @media screen and (max-width:350px) {
+            font-size: 10px;
+        }
     }
     .movie_name{
         color: white;
@@ -20,6 +26,13 @@
         display: inline-block;
         padding:  30px;
         font-size: 25px;
+        @media screen and (max-width:600px) and (min-width:351px){
+            font-size: 15px;
+        }
+        @media screen and (max-width:350px) {
+            font-size: 10px;
+            padding-bottom: 50px;;
+        }
     }
     .rating{
         right: 6vw;
@@ -29,5 +42,11 @@
         padding-bottom: 25px;
         padding-left: 1vw;
         border-left: 0.5px solid rgb(65, 64, 64);
+        @media screen and (max-width:400px){
+            border: none;
+            padding-top: 45px;
+            padding-right:10vw ;
+        }
+
     }
 }
