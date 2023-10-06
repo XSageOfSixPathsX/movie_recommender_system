@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react'
-import axios from 'axios'
 import "../styles/movieRecommendationStyles.scss"
 
 async function fetchMovieData(movieName) {
@@ -61,7 +60,7 @@ function MovieRecommendation(props) {
             </div>
           </div>
         ) : (
-          <p>Loading...</p>
+          <div className='load'>Loading....</div>
         )}
     </div>
   );

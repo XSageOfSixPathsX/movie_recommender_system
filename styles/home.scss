@@ -6,8 +6,13 @@ body{
     margin: 0;
 }
 
+body::-webkit-scrollbar {
+    display: none;
+  }
+  
+
 .instructions_main{
     font-family: 'Montserrat', sans-serif;
     font-size: 30px;
-    padding: 40px 30px 60px;
+    padding: 20px 30px 60px;
 }
