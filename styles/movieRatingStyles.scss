@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+.movie_rating_card{
+    background-color: rgb(34, 32, 32);
+    width: 90vw;
+    margin-left: 5vw;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    border: 0.5px solid rgb(65, 64, 64);
+    .snum{
+        display: inline-block;
+        color: white;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 25px;
+        padding-left: 30px;
+    }
+    .movie_name{
+        color: white;
+        font-family: 'Montserrat', sans-serif;
+        display: inline-block;
+        padding:  30px;
+        font-size: 25px;
+    }
+    .rating{
+        right: calc(5vw + 10px);
+        display: inline-block;
+        position: absolute;
+        padding-top: 27px;
+        padding-bottom: 25px;
+        padding-left: 1vw;
+        border-left: 0.5px solid rgb(65, 64, 64);
+    }
+}

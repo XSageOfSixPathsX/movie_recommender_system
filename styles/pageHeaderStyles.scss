@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+.header{
+    background-color: rgba(34, 32, 32, 0.753);
+    padding: 50px;
+    margin: 0px 0px 50px;
+    border-bottom: 0.5px solid rgb(58, 55, 55);
+    .main_text{
+        font-family: 'Pixelify Sans', cursive;
+        font-size: 80px;
+        text-align: center;
+    }
+    .secondary_text{
+        font-family: 'Montserrat', sans-serif;
+        font-size: 18px;
+        margin-top: 15px;
+        text-align: center;
+    }
+}
+
+    
