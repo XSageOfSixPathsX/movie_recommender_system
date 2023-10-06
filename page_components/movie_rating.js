@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect,useState} from 'react'
 import "../styles/movieRatingStyles.scss"
 import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
@@ -8,7 +8,7 @@ import SentimentDissatisfiedIcon from '@mui/icons-material/SentimentDissatisfied
 import SentimentSatisfiedIcon from '@mui/icons-material/SentimentSatisfied';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAltOutlined';
 import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
-import axios from 'axios';
+
 
 
 const StyledRating = styled(Rating)(({ theme }) => ({
@@ -51,44 +51,13 @@ IconContainer.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-async function fetchMovieData(movieName) {
-    const options = {
-      method: 'GET',
-      url: `https://moviesdatabase.p.rapidapi.com/titles/search/title/${movieName}`,
-      params: {
-        exact: 'true',
-        titleType: 'movie'
-      },
-      headers: {
-        'X-RapidAPI-Key': '59579dae20msh4bb329428d3d246p1ceafajsnf64f886d3a11',
-        'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com'
-      }
-    };
-  
-    try {
-      const response = await axios.request(options);
-      console.log(response.data);
-      return response.data; 
-    } catch (error) {
-      console.error(error);
-      return null;
-    }
-  }
-  
-
 function MovieRating(props) {
-let movie_data;
-useEffect(() => {
-        const promises =  fetchMovieData(props.movie_name);
-        Promise.all(promises)
-          .then((movieDataArray) => {
-            movie_data=movieDataArray;
-          })
-          .catch((error) => {
-            console.error(error);
-          });
-    }, []);
+  const [rating, setRating] = useState(3); 
 
+  const handleRatingChange = (event, newValue) => {
+    setRating(newValue); 
+    console.log(newValue);
+  };
   return (
     <div className='movie_rating_card'>
         
@@ -102,6 +71,7 @@ useEffect(() => {
                     <IconContainer style={{ fontSize: '36px'}} {...props} />
                 )}
                 getLabelText={(value) => customIcons[value].label}
+                onChange={handleRatingChange}
                 highlightSelectedOnly
             />
         </div>

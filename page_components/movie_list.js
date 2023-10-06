@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react';
 import MovieRating from "../page_components/movie_rating";
 
 const movie_list = [
