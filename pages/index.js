@@ -3,7 +3,6 @@ import PageHeader from '@/page_components/page_header'
 import MovieList from '../page_components/movie_list'
 import RoutingBsutton from '@/page_components/routing_button'
 import dynamic from 'next/dynamic'
-
 import "../styles/home.scss"
 
 function home() {

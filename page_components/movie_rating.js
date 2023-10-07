@@ -9,6 +9,30 @@ import SentimentSatisfiedIcon from '@mui/icons-material/SentimentSatisfied';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAltOutlined';
 import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
 
+async function fetchMovieData(movieName) {
+  const options = {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzZDUxNTY3NGE1NWI2OWViZmI1OWNlNjI4NzQxYzM0NiIsInN1YiI6IjY1MjAwNzM5MDcyMTY2MDBlMmQ5M2RhMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.c2U37Zp6Up2G0U_Jx3VJGA4GI9V7JloiR-Vt2vm-XiI'
+    }
+  };
+
+  const url = `https://api.themoviedb.org/3/search/movie?query=${movieName}&include_adult=false&language=en-US&page=1`;
+
+  try {
+    const response = await fetch(url, options);
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const responseData = await response.json();
+    
+    return responseData;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
 
 
 const StyledRating = styled(Rating)(({ theme }) => ({
@@ -53,6 +77,21 @@ IconContainer.propTypes = {
 
 function MovieRating(props) {
   const [rating, setRating] = useState(3); 
+  const [movieData, setMovieData] = useState(null);
+  const [imgsrc, setImgsrc]=useState(null);
+
+  useEffect(() => {
+    fetchMovieData(props.movie_name)
+      .then((data) => {
+        setMovieData(data);
+        setImgsrc(`https://image.tmdb.org/t/p/original/${data.results[0].poster_path}`);
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [props.movie_name]);
+
 
   const handleRatingChange = (event, newValue) => {
     setRating(newValue); 
@@ -60,7 +99,9 @@ function MovieRating(props) {
   };
   return (
     <div className='movie_rating_card'>
-        
+        <div className='image'>
+              <img src={imgsrc} />
+            </div>
         <div className='snum'>{props.snum+1}.</div>
         <div className='movie_name'>{props.movie_name}</div>
         <div className='rating'>

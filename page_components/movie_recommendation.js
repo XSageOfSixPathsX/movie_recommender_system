@@ -44,9 +44,6 @@ function MovieRecommendation(props) {
       });
   }, [props.movie_name]);
 
-
-  
-  console.log(imgsrc);
   return (
     <div>
         {movieData ? (
@@ -55,8 +52,10 @@ function MovieRecommendation(props) {
               <img src={imgsrc} />
             </div>
             <div className='about'>
-              <div className='title'>{movieData.results[0].original_title}</div>
-              <div className='description'>{movieData.results[0].overview}</div>
+              <div className='title'>{movieData.results[0].title}</div>
+              <div className='release'>Released date : <div className='date'>{movieData.results[0].release_date}</div></div>
+              <div className='popularity'>Popularity : <div className='percent'>{movieData.results[0].popularity}%</div></div>
+              <div className='description'>Synopsis : <div className='text'>{movieData.results[0].overview}</div></div>
             </div>
           </div>
         ) : (
