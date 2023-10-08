@@ -1,7 +1,7 @@
 import MovieRating from "../page_components/movie_rating";
 
 const movie_list = [
-    "American Beauty",
+    "The Mask",
     "As Good as It Gets",
     "Being John Malkovich",
     "The Big Lebowski",
