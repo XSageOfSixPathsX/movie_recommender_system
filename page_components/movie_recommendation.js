@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react'
+import {recomovie} from './movie_list';
 import "../styles/movieRecommendationStyles.scss"
 
 async function fetchMovieData(movieName) {
@@ -17,7 +18,7 @@ async function fetchMovieData(movieName) {
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
-    const responseData = await response.json();
+    const responseData = await response.json(); 
     
     return responseData;
   } catch (error) {
@@ -27,13 +28,13 @@ async function fetchMovieData(movieName) {
 }
 
 
-function MovieRecommendation(props) {
+function MovieRecommendation() {
   const [movieData, setMovieData] = useState(null);
-
   const [imgsrc, setImgsrc]=useState(null);
+  const [currmovie, setCurrMovie]=useState(recomovie);
 
   useEffect(() => {
-    fetchMovieData(props.movie_name)
+    fetchMovieData(currmovie)
       .then((data) => {
         setMovieData(data);
         setImgsrc(`https://image.tmdb.org/t/p/original/${data.results[0].poster_path}`);
@@ -42,7 +43,7 @@ function MovieRecommendation(props) {
       .catch((err) => {
         console.log(err);
       });
-  }, [props.movie_name]);
+  }, [currmovie]);
 
   return (
     <div>

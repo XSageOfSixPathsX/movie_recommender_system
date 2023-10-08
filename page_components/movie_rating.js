@@ -8,6 +8,7 @@ import SentimentDissatisfiedIcon from '@mui/icons-material/SentimentDissatisfied
 import SentimentSatisfiedIcon from '@mui/icons-material/SentimentSatisfied';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAltOutlined';
 import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
+import { UpdateMovieRating } from './movie_list';
 
 async function fetchMovieData(movieName) {
   const options = {
@@ -76,14 +77,11 @@ IconContainer.propTypes = {
 };
 
 function MovieRating(props) {
-  const [rating, setRating] = useState(3); 
-  const [movieData, setMovieData] = useState(null);
   const [imgsrc, setImgsrc]=useState(null);
 
   useEffect(() => {
     fetchMovieData(props.movie_name)
       .then((data) => {
-        setMovieData(data);
         setImgsrc(`https://image.tmdb.org/t/p/original/${data.results[0].poster_path}`);
         console.log(data);
       })
@@ -93,9 +91,10 @@ function MovieRating(props) {
   }, [props.movie_name]);
 
 
-  const handleRatingChange = (event, newValue) => {
-    setRating(newValue); 
-    console.log(newValue);
+  const handleRatingChange = (newValue,movie_name) => {
+    props.setRating(newValue);
+    props.setMname(movie_name);
+    console.log(movie_name,newValue);
   };
   return (
     <div className='movie_rating_card'>
@@ -105,16 +104,16 @@ function MovieRating(props) {
         <div className='snum'>{props.snum+1}.</div>
         <div className='movie_name'>{props.movie_name}</div>
         <div className='rating'>
-            <StyledRating
-                name="highlight-selected-only"
-                defaultValue={3}
-                IconContainerComponent={(props) => (
-                    <IconContainer style={{ fontSize: '36px'}} {...props} />
-                )}
-                getLabelText={(value) => customIcons[value].label}
-                onChange={handleRatingChange}
-                highlightSelectedOnly
-            />
+        <StyledRating
+          name="highlight-selected-only"
+          defaultValue={3}
+          IconContainerComponent={(props) => (
+            <IconContainer style={{ fontSize: '36px' }} {...props} />
+          )}
+          getLabelText={(value) => customIcons[value].label}
+          onChange={(event, newValue) => handleRatingChange(newValue, props.movie_name)}
+          highlightSelectedOnly
+        />
         </div>
     </div>
   )

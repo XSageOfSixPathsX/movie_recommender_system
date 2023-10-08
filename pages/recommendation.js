@@ -7,7 +7,7 @@ function recommendation() {
   return (
     <div>
         <PageHeader/>
-        <MovieRecommendation movie_name="Avatar" />
+        <MovieRecommendation/>
     </div>
   )
 }

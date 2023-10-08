@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
+.none{
+    display: none;
+}
 .recommended{
     font-family: 'Montserrat', sans-serif;
     padding-top: 10px;
@@ -16,8 +19,8 @@
         width: 380px;
         border-radius: 12px;
         @media screen and (max-width:700px){
-            height: 500px;
-            width: 350px;
+            height: 450px;
+            width: 300px;
         }
     }
     @media screen and (max-width:700px) {
