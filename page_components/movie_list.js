@@ -3,35 +3,34 @@ import Link from 'next/link'
 import MovieRating from "../page_components/movie_rating";
 import "../styles/movieListStyles.scss"
 
-// eslint-disable-next-line react-hooks/rules-of-hooks
 export let recomovie="Annihilation"
 
 const movie_list = {
-  "The Mask": 6,
-  "Carlito's Way": 6,
-  "Braveheart": 6,
-  "The Big Lebowski": 6,
-  "Guantanamera": 6,
-  "Nightwatch": 6,
-  "Ridicule": 6,
-  "Charade": 6,
-  "Jude": 6,
-  "Clerks": 6,
-  "Crash": 6,
-  "Anaconda": 6,
-  "Forrest Gump": 6,
-  "The Godfather": 6,
-  "The Graduate": 6,
-  "The Hudsucker Proxy": 6,
-  "Jackie Brown": 6,
-  "Titanic": 6,
-  "Kids": 6,
-  "Fled": 6,
-  "Black Beauty": 6,
-  "Living in Oblivion": 6,
-  "Lone Star": 6,
-  "Men in Black": 6,
-  "True Lies": 6
+  "The Mask": 3,
+  "Carlito's Way": 3,
+  "Braveheart": 3,
+  "The Big Lebowski": 3,
+  "Guantanamera": 3,
+  "Nightwatch": 3,
+  "Ridicule": 3,
+  "Charade": 3,
+  "Jude": 3,
+  "Clerks": 3,
+  "Crash": 3,
+  "Anaconda": 3,
+  "Forrest Gump": 3,
+  "The Godfather": 3,
+  "The Graduate": 3,
+  "The Hudsucker Proxy": 3,
+  "Jackie Brown": 3,
+  "Titanic": 3,
+  "Kids": 3,
+  "Fled": 3,
+  "Black Beauty": 3,
+  "Living in Oblivion": 3,
+  "Lone Star": 3,
+  "Men in Black": 3,
+  "True Lies": 3
 };
 
 const movie_list_id = {
@@ -64,33 +63,33 @@ const movie_list_id = {
 
 const id_rating = {
   "rating":{
-  "72": 6,
-  "76": 6,
-  "22": 6,
-  "902": 6,
-  "1600": 6,
-  "1625": 6,
-  "224": 6,
-  "945": 6,
-  "149": 6,
-  "42": 6,
-  "325": 6,
-  "1013": 6,
-  "69": 6,
-  "127": 6,
-  "197": 6,
-  "81": 6,
-  "346": 6,
-  "313": 6,
-  "772": 6,
-  "829": 6,
-  "973": 6,
-  "1070": 6,
-  "124": 6,
-  "257": 6,
-  "385": 6
+  "72": 3,
+  "76": 3,
+  "22": 3,
+  "902": 3,
+  "1600": 3,
+  "1625": 3,
+  "224": 3,
+  "945": 3,
+  "149": 3,
+  "42": 3,
+  "325": 3,
+  "1013": 3,
+  "69": 3,
+  "127": 3,
+  "197": 3,
+  "81": 3,
+  "346": 3,
+  "313": 3,
+  "772": 3,
+  "829": 3,
+  "973": 3,
+  "1070": 3,
+  "124": 3,
+  "257": 3,
+  "385": 3
   },
-  "number_of_movie": 1
+  "number_of_movie": 10
 }
 
 
@@ -123,6 +122,7 @@ function MovieList() {
   const [rating, setRating] = useState(6);
   const [mname, setMname] = useState("");
   const [currMovie,setCurrMovie]=useState("Avatar")
+  const [showButton,setShowButton]=useState(false);
 
   function UpdateMovieRating(movieName, newRating) {
     const updatedMovies = { ...movies }; 
@@ -131,15 +131,15 @@ function MovieList() {
     console.log("rating updated : "+updatedMovies[movieName]);  
   }
   
-  useEffect(() => {
-    recomovie=currMovie;
-  },[currMovie])
-
+  function handle(mov){
+    recomovie=mov;
+    console.log("helsds");
+  }
   useEffect(() => {
     UpdateMovieRating(mname, rating);
   }, [rating]);
 
-  function handleSubmit() {
+  function HandleSubmit() {
     console.log("hi");
     const updatedrating = { ...id_rating };
   
@@ -151,14 +151,21 @@ function MovieList() {
     }
     const raw = JSON.stringify(updatedrating);
     fetchMovieData(raw)
-    .then((cdata)=> {
-      console.log(cdata);
-      const ans=cdata.data.indexof(',');
-      setCurrMovie(cdata.data.substring(0,ans-1));
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  .then((cdata) => {
+    let x = Math.floor((Math.random() * 10));
+    console.log(cdata.data[x]);
+    const myArray = cdata.data[x].split(" ");
+    const movieName = myArray[0];
+    recomovie = movieName;
+    setShowButton(true);
+    setCurrMovie(movieName);
+    handle(myArray[0]);
+    console.log("hello " + myArray[0]);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
     console.log("new arr" + updatedrating["rating"]["1070"]);
     console.log('Updated Ratings:', updatedrating);
   }
@@ -175,9 +182,15 @@ function MovieList() {
           />
         );
       })}
+      {!showButton ? (
        <div className='button_container'>
-           <Link href={`/recommendation`}> <button onClick={handleSubmit}>Submit Preferences</button></Link>
-    </div>
+       <button onClick={HandleSubmit}>Submit Preferences</button>
+    </div>):null}
+    <div className='secbutton'>
+    {showButton ?
+(           <Link href={`/recommendation`}> <button className='numbutton'>open page</button></Link>)
+       :null}
+       </div>
     </div>
   );
 }
