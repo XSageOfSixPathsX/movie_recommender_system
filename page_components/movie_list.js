@@ -2,6 +2,7 @@ import React, { useState,useEffect } from 'react';
 import Link from 'next/link'
 import MovieRating from "../page_components/movie_rating";
 import "../styles/movieListStyles.scss"
+import RoutingButton from './routing_button';
 
 export let recomovie="Annihilation"
 
@@ -182,15 +183,7 @@ function MovieList() {
           />
         );
       })}
-      {!showButton ? (
-       <div className='button_container'>
-       <button onClick={HandleSubmit}>Submit Preferences</button>
-    </div>):null}
-    <div className='secbutton'>
-    {showButton ?
-(           <Link href={`/recommendation`}> <button className='numbutton'>open page</button></Link>)
-       :null}
-       </div>
+      <RoutingButton />
     </div>
   );
 }
