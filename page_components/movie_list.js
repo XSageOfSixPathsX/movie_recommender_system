@@ -177,7 +177,7 @@ function MovieList() {
 
   return (
     <div>
-      <div>Please rate movies from this list of the genres {genre1}, {genre2}, and {genre3} that you selected and get the perfect recommendation</div>
+      <div className='tip'>Please rate movies from this list of the genres <span>{genre1}</span>, <span>{genre2}</span>, and <span>{genre3}</span> that you selected and get the perfect recommendation</div>
   
       {list1 !== null && list2 !== null && list3 !== null && (
         <>

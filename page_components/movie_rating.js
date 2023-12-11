@@ -99,7 +99,7 @@ function MovieRating(props) {
   return (
     <Card className='movie_rating_card'>
         <Image className='img' src={imgsrc}  />
-        <Card.Header className='header'>{props.snum+1}. {props.movie_name}</Card.Header>
+        <Card.Header className='header'>{props.id}. {props.movie_name}</Card.Header>
         <Card.Description className='rating'> 
           <StyledRating
             name="highlight-selected-only"

@@ -2,18 +2,18 @@ body{
     background-color: rgb(59, 59, 59);
     color: white;
     margin: 0;
-    font-family: 'Montserrat', sans-serif;
 }
 
 .button_container{
     text-align: center;
     button{
+        color: white;
         font-family: 'Montserrat', sans-serif;
-        background-color: rgb(168, 168, 168);
+        background-color: rgb(207, 4, 4);
         padding: 10px;
         font-size: 20px;
         margin: 30px;
         border-radius: 10px;
-        border: 0.5px solid rgb(78, 76, 76);
+        border: 0.5px solid rgb(216, 4, 4);
     }
 }

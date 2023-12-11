@@ -202,6 +202,7 @@ function MovieRecommendation() {
 
   return (
     <div>
+    <div className='tip'>Below is the movie we recommend you should watch. Enjoy!</div>
         {currmovie && movieData ? (
           <div className='recommended'>
             <div className='image'>

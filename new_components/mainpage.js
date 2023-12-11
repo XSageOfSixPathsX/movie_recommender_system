@@ -3,9 +3,7 @@ import { Form, Radio } from 'semantic-ui-react'
 import '../styles/mainpage.scss'
 
 function mainpage() {
-    const handleLanguage = (e) => {
-        localStorage.setItem("language",e.target.value)
-    }
+   
     const handleChange1 = (e) => {
         localStorage.setItem("genre1", e.target.value);
     }
@@ -18,30 +16,22 @@ function mainpage() {
 
   return (
     <div>
-        <div>Please enter the details below :</div>
+        <div className='tip'>Please enter the details below :</div>
         <div className='field'><div className='label'>Enter age</div>
         <input type='number' className='ageInput'/></div>
         <div className='field'>
-        <div className='label'>enter gender</div>
-        <select>
+        <div className='label'>Enter gender</div>
+        <select className='genderInput'>
             <option value="">Gender</option>
             <option value="1">Male</option>
             <option value="0">Female</option>
         </select>
         </div>
         <div className='field'>
-            <div className='label'>Enter language</div>
-            <select onChange={handleLanguage}>
-                <option value="">Language</option>
-                <option value="English">English</option>
-                <option value="Hindi">Hindi</option>
-            </select>
-        </div>
-        <div className='field'>
-            <div className='label'>Which genre would you like to watch</div>
+            <div className='tip'>Which genre would you like to watch</div>
             <div>
                 <div className='label'>1st Choice</div>
-                <select onChange={handleChange1}>
+                <select className='genreInput1' onChange={handleChange1}>
                     <option value="">Genre</option>
                     <option value="Horror">Horror</option>
                     <option value="Thriller">Thriller</option>
@@ -53,7 +43,7 @@ function mainpage() {
             </div>
             <div>
                 <div className='label'>2nd Choice</div>
-                <select onChange={handleChange2}>
+                <select className='genreInput2' onChange={handleChange2}>
                     <option value="">Genre</option>
                     <option value="Horror">Horror</option>
                     <option value="Thriller">Thriller</option>
@@ -65,7 +55,7 @@ function mainpage() {
             </div>
             <div>
                 <div className='label'>3rd Choice</div>
-                <select onChange={handleChange3}>
+                <select className='genreInput3' onChange={handleChange3}>
                     <option value="">Genre</option>
                     <option value="Horror">Horror</option>
                     <option value="Thriller">Thriller</option>
