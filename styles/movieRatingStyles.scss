@@ -1,19 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
-
+/*
 .movie_rating_card{
+    display: flex;
+    flex-wrap: wrap;
     background-color: rgb(34, 32, 32);
-    width: 90vw;
+    width: 20vw;
     margin-left: 5vw;
     margin-bottom: 20px;
     border-radius: 12px;
     border: 0.5px solid rgb(65, 64, 64);
-    height: 150px;
+    height: 25vw;
     .image{
-        display: inline-block;
-        position: absolute;
         img{
-            height: 150px;
-            width: 170px;
+            height: 20vw;
+            width: 20vw;
             border-top-left-radius: 15px;
             border-bottom-left-radius: 15px;
             @media screen and (max-width: 700px) {
@@ -28,9 +28,9 @@
             position: relative;
 
         }
-    }
+    }/*
     .snum{
-        display: inline-block;
+        
         color: white;
         font-family: 'Montserrat', sans-serif;
         font-size: 25px;
@@ -58,15 +58,15 @@
             padding-top: 5px;
             padding-bottom: 15px;;
         }
-    }
-    .rating{
-        right: 8vw;
+    }*/
+   /* .rating{
+        
         display: inline-block;
         position: absolute;
         padding-top: 27px;
         padding-bottom: 25px;
         padding-left: 2vw;
-        margin-top: 30px;
+        margin-top: 500px;
         border-left: 0.5px solid rgb(65, 64, 64);
         @media screen and (max-width:700px){
             border: none;
@@ -86,5 +86,34 @@
     }
     @media screen and (max-width:360px) {
           width: 300px;
+    }
+}
+*/
+
+.movie_rating_card{
+    display: inline-block;
+    width: 20vw;
+    height: 28vw;
+    margin-left: 4vw;
+    border-radius: 20px;
+   margin-top: 3vw;
+
+    background-color: rgb(36, 36, 36);
+    .img{
+        width: 20vw;
+        height: 20vw;
+        border-top-right-radius: 20px;
+        border-top-left-radius: 20px;
+    }
+    .header{
+        font-size: 18px;
+        padding: 1.4vw;
+        border-bottom-color: rgba(0, 0, 0, 0);
+        text-align: center;
+        background-color: rgba(128, 128, 128, 0);
+    }
+    .rating{
+        margin-top: -50px;
+        text-align: center;
     }
 }

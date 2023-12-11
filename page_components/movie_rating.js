@@ -8,7 +8,7 @@ import SentimentDissatisfiedIcon from '@mui/icons-material/SentimentDissatisfied
 import SentimentSatisfiedIcon from '@mui/icons-material/SentimentSatisfied';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAltOutlined';
 import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
-import { UpdateMovieRating } from './movie_list';
+import { Card, Icon, Image } from 'semantic-ui-react'
 
 async function fetchMovieData(movieName) {
   const options = {
@@ -35,15 +35,16 @@ async function fetchMovieData(movieName) {
   }
 }
 
-
 const StyledRating = styled(Rating)(({ theme }) => ({
-    '& .MuiRating-iconEmpty .MuiSvgIcon-root': {
-      color: 'white', 
-      fontSize: '36px',
-    },
-  }));
-
-
+  '& .MuiRating-iconEmpty .MuiSvgIcon-root': {
+    color: 'white', 
+    fontSize: '28px',
+  },
+  '& .MuiRating-iconFilled .MuiSvgIcon-root': {
+    fontSize: '28px',
+  },
+}));
+  
 const customIcons = {
   1: {
     icon: <SentimentVeryDissatisfiedIcon color="error" fontSize='36px' />,
@@ -90,32 +91,28 @@ function MovieRating(props) {
       });
   }, [props.movie_name]);
 
+  const handleChange = (e) => {
+    localStorage.setItem(props.id,e.target.value);
+  }
+  
 
-  const handleRatingChange = (newValue,movie_name) => {
-    props.setRating(newValue);
-    props.setMname(movie_name);
-    console.log(movie_name,newValue);
-  };
   return (
-    <div className='movie_rating_card'>
-        <div className='image'>
-              <img src={imgsrc} />
-            </div>
-        <div className='snum'>{props.snum+1}.</div>
-        <div className='movie_name'>{props.movie_name}</div>
-        <div className='rating'>
-        <StyledRating
-          name="highlight-selected-only"
-          defaultValue={3}
-          IconContainerComponent={(props) => (
-            <IconContainer style={{ fontSize: '36px' }} {...props} />
-          )}
-          getLabelText={(value) => customIcons[value].label}
-          onChange={(event, newValue) => handleRatingChange(newValue, props.movie_name)}
-          highlightSelectedOnly
-        />
-        </div>
-    </div>
+    <Card className='movie_rating_card'>
+        <Image className='img' src={imgsrc}  />
+        <Card.Header className='header'>{props.snum+1}. {props.movie_name}</Card.Header>
+        <Card.Description className='rating'> 
+          <StyledRating
+            name="highlight-selected-only"
+            defaultValue={3}
+            onChange={handleChange}
+            IconContainerComponent={(props) => (
+              <IconContainer style={{ fontSize: '36px' }} {...props} />
+            )}
+            getLabelText={(value) => customIcons[value].label}
+            highlightSelectedOnly
+          />
+        </Card.Description>
+    </Card>
   )
 }
 

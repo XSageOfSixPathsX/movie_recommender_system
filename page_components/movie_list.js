@@ -1,98 +1,53 @@
-import React, { useState,useEffect } from 'react';
-import Link from 'next/link'
+import React, { useState,useEffect, useRef } from 'react';
 import MovieRating from "../page_components/movie_rating";
 import "../styles/movieListStyles.scss"
-import RoutingButton from './routing_button';
 
 export let recomovie="Annihilation"
 
-const movie_list = {
-  "The Mask": 3,
-  "Carlito's Way": 3,
-  "Braveheart": 3,
-  "The Big Lebowski": 3,
-  "Guantanamera": 3,
-  "Nightwatch": 3,
-  "Ridicule": 3,
-  "Charade": 3,
-  "Jude": 3,
-  "Clerks": 3,
-  "Crash": 3,
-  "Anaconda": 3,
-  "Forrest Gump": 3,
-  "The Godfather": 3,
-  "The Graduate": 3,
-  "The Hudsucker Proxy": 3,
-  "Jackie Brown": 3,
+const Comedy = {
+  "Groundhog Day": 3,
+  "Airplane!": 3,
+  "Rushmore": 3,
+  "Duck Soup": 3,
+  "Borat": 3,
+};
+
+const Romance = {
   "Titanic": 3,
-  "Kids": 3,
-  "Fled": 3,
-  "Black Beauty": 3,
-  "Living in Oblivion": 3,
-  "Lone Star": 3,
-  "Men in Black": 3,
-  "True Lies": 3
+  "Notting Hill": 3,
+  "Pretty Woman": 3,
+  "The Notebook": 3,
+  "Pride and Prejudice": 3,
+};
+const Horror = {
+  "Saw": 3,
+  "The Babadook": 3,
+  "28 Days Later": 3,
+  "The Woman in Black": 3,
+  "Insidious": 3,
+};
+const Thriller = {
+  "Gone Girl": 3,
+  "The Usual Suspects": 3,
+  "Se7en": 3,
+  "The Silence of the Lambs": 3,
+  "Fight Club": 3,
+};
+const Animated = {
+  "The Lion King": 3,
+  "Toy Story": 3,
+  "The Iron Giant": 3,
+  "Shrek": 3,
+  "Finding Nemo": 3,
 };
 
-const movie_list_id = {
-  "The Mask": 72,
-  "Carlito's Way":76,
-  "Braveheart": 22,
-  "The Big Lebowski": 902,
-  "Guantanamera": 1600,
-  "Nightwatch": 1625,
-  "Ridicule": 224,
-  "Charade": 945,
-  "Jude": 149,
-  "Clerks": 42,
-  "Crash": 325,
-  "Anaconda": 1013,
-  "Forrest Gump": 69,
-  "The Godfather": 127,
-  "The Graduate": 197,
-  "The Hudsucker Proxy": 81,
-  "Jackie Brown": 346,
-  "Titanic": 313,
-  "Kids": 772,
-  "Fled": 829,
-  "Black Beauty": 389,
-  "Living in Oblivion": 1070,
-  "Lone Star": 124,
-  "Men in Black": 257,
-  "True Lies": 385
-};
-
-const id_rating = {
-  "rating":{
-  "72": 3,
-  "76": 3,
-  "22": 3,
-  "902": 3,
-  "1600": 3,
-  "1625": 3,
-  "224": 3,
-  "945": 3,
-  "149": 3,
-  "42": 3,
-  "325": 3,
-  "1013": 3,
-  "69": 3,
-  "127": 3,
-  "197": 3,
-  "81": 3,
-  "346": 3,
-  "313": 3,
-  "772": 3,
-  "829": 3,
-  "973": 3,
-  "1070": 3,
-  "124": 3,
-  "257": 3,
-  "385": 3
-  },
-  "number_of_movie": 10
+const Action = {
+  "Casino Royale": 3,
+  "The Bourne Supremacy": 3,
+  "Kill Bill: Vol. 1": 3,
+  "The Fugitive": 3,
+  "Taken": 3,
 }
-
 
 async function fetchMovieData(raw) {
   var myHeaders = new Headers();
@@ -119,73 +74,146 @@ async function fetchMovieData(raw) {
 }
 
 function MovieList() {
-  const [movies, setMovies] = useState(movie_list);
-  const [rating, setRating] = useState(6);
-  const [mname, setMname] = useState("");
-  const [currMovie,setCurrMovie]=useState("Avatar")
-  const [showButton,setShowButton]=useState(false);
 
-  function UpdateMovieRating(movieName, newRating) {
-    const updatedMovies = { ...movies }; 
-    updatedMovies[movieName] = newRating;
-    setMovies(updatedMovies);
-    console.log("rating updated : "+updatedMovies[movieName]);  
-  }
-  
-  function handle(mov){
-    recomovie=mov;
-    console.log("helsds");
-  }
+  const [genre1,setGenre1] = useState("");
+  const [genre2,setGenre2] = useState("");
+  const [genre3,setGenre3] = useState("");
+  const [list1, setList1]=useState(null);
+  const [list2, setList2]=useState(null);
+  const [list3, setList3]=useState(null);
+
   useEffect(() => {
-    UpdateMovieRating(mname, rating);
-  }, [rating]);
-
-  function HandleSubmit() {
-    console.log("hi");
-    const updatedrating = { ...id_rating };
-  
-    for (const movie_name in movies) {
-      if (movies.hasOwnProperty(movie_name)) {
-        const movie_id = movie_list_id[movie_name];
-        updatedrating["rating"][movie_id] = movies[movie_name];
-      }
+    for (let i = 1; i <= 12; ++i) {
+      localStorage.setItem(i, 3);
     }
-    const raw = JSON.stringify(updatedrating);
-    fetchMovieData(raw)
-  .then((cdata) => {
-    let x = Math.floor((Math.random() * 10));
-    console.log(cdata.data[x]);
-    const myArray = cdata.data[x].split(" ");
-    const movieName = myArray[0];
-    recomovie = movieName;
-    setShowButton(true);
-    setCurrMovie(movieName);
-    handle(myArray[0]);
-    console.log("hello " + myArray[0]);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+  }, []);  
 
-    console.log("new arr" + updatedrating["rating"]["1070"]);
-    console.log('Updated Ratings:', updatedrating);
-  }
+  useEffect(() => {
+    setGenre1(localStorage.getItem("genre1"))
+    setGenre2(localStorage.getItem("genre2"))
+    setGenre3(localStorage.getItem("genre3"))
+  },[]);
+
+  useEffect(()=>{
+    if(genre1==="Romance")
+    {
+      setList1(Romance);
+    }
+    else if (genre1==="Thriller")
+    {
+      setList1(Thriller);
+    }
+    else if (genre1==="Horror")
+    {
+      setList1(Horror);
+    }
+    else if (genre1==="Animated")
+    {
+      setList1(Animated);
+    }
+    else if (genre1==="Comedy")
+    {
+      setList1(Comedy);
+    }
+    else
+    {
+      setList1(Action);
+    }
+  },[genre1])
+
+  useEffect(()=>{
+    if(genre2==="Romance")
+    {
+      setList2(Romance);
+    }
+    else if (genre2==="Thriller")
+    {
+      setList2(Thriller);
+    }
+    else if (genre2==="Horror")
+    {
+      setList2(Horror);
+    }
+    else if (genre2==="Animated")
+    {
+      setList2(Animated);
+    }
+    else if (genre2==="Comedy")
+    {
+      setList2(Comedy);
+    }
+    else
+    {
+      setList2(Action);
+    }
+  },[genre2])
+
+  useEffect(()=>{
+    if(genre3==="Romance")
+    {
+      setList3(Romance);
+    }
+    else if (genre3==="Thriller")
+    {
+      setList3(Thriller);
+    }
+    else if (genre3==="Horror")
+    {
+      setList3(Horror);
+    }
+    else if (genre3==="Animated")
+    {
+      setList3(Animated);
+    }
+    else if (genre3==="Comedy")
+    {
+      setList3(Comedy);
+    }
+    else
+    {
+      setList3(Action);
+    }
+  },[genre3])
+
   return (
     <div>
-      {Object.keys(movie_list).map((movie, index) => {
-        return (
-          <MovieRating
-            key={index}
-            snum={index}
-            movie_name={movie}
-            setRating={setRating}
-            setMname={setMname}
-          />
-        );
-      })}
-      <RoutingButton />
+      <div>Please rate movies from this list of the genres {genre1}, {genre2}, and {genre3} that you selected and get the perfect recommendation</div>
+  
+      {list1 !== null && list2 !== null && list3 !== null && (
+        <>
+          {Object.keys(list1).slice(0, 5).map((movie, index) => (
+            <MovieRating
+              key={index}
+              snum={index}
+              movie_name={movie}
+              genre={genre1}
+              id={index + 1}
+            />
+          ))}
+  
+          {Object.keys(list2).slice(0, 4).map((movie, index) => (
+            <MovieRating
+              key={index}
+              snum={index}
+              movie_name={movie}
+              genre={genre2}
+              id={index + 6}
+            />
+          ))}
+  
+          {Object.keys(list3).slice(0, 3).map((movie, index) => (
+            <MovieRating
+              key={index}
+              snum={index}
+              movie_name={movie}
+              genre={genre3}
+              id={index + 10}
+            />
+          ))}
+        </>
+      )}
     </div>
   );
-}
+          }
 
 export default MovieList;
