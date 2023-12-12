@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
 
 body{
@@ -14,7 +14,6 @@ body{
 body::-webkit-scrollbar {
     display: none;
   }
-  
 
 .instructions_main{
     font-family: 'Montserrat', sans-serif;
@@ -23,7 +22,6 @@ body::-webkit-scrollbar {
     @media screen and (max-width:600px) {
         font-size: 22px;
     }
-    
 }
 
 .button_container{
