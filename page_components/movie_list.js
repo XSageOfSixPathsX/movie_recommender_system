@@ -81,12 +81,19 @@ function MovieList() {
   const [list1, setList1]=useState(null);
   const [list2, setList2]=useState(null);
   const [list3, setList3]=useState(null);
+  const [load, setLoad]=useState(0);
 
   useEffect(() => {
     for (let i = 1; i <= 12; ++i) {
       localStorage.setItem(i, 3);
     }
   }, []);  
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoad(1);
+    }, 3000);
+  },[])
 
   useEffect(() => {
     setGenre1(localStorage.getItem("genre1"))
@@ -179,7 +186,7 @@ function MovieList() {
     <div>
       <div className='tip'>Please rate movies from this list of the genres <span>{genre1}</span>, <span>{genre2}</span>, and <span>{genre3}</span> that you selected and get the perfect recommendation</div>
   
-      {list1 !== null && list2 !== null && list3 !== null && (
+      {load && list1 !== null && list2 !== null && list3 !== null ? (
         <>
           {Object.keys(list1).slice(0, 5).map((movie, index) => (
             <MovieRating
@@ -194,6 +201,7 @@ function MovieList() {
           {Object.keys(list2).slice(0, 4).map((movie, index) => (
             <MovieRating
               key={index}
+              
               snum={index}
               movie_name={movie}
               genre={genre2}
@@ -211,7 +219,7 @@ function MovieList() {
             />
           ))}
         </>
-      )}
+      ):(<div className='load'>Loading....</div>)}
     </div>
   );
           }

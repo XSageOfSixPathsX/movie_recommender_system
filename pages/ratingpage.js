@@ -9,6 +9,8 @@ function ratingpage() {
     <div>
         <PageHeader />
         <MovieList />
+
+        
         <div className='button_container'>
            <Link href={`/recommendation`}> <button>Submit Preferences</button></Link>
         </div>

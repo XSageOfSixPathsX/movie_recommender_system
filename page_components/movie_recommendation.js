@@ -111,8 +111,13 @@ function MovieRecommendation() {
   const [genre, setGenre]=useState(null);
   const [times,setTimes]=useState(0);
   const [t2, setT2]=useState(0);
+  const [load,setLoad]=useState(0);
 
-
+  useEffect(() => {
+    setTimeout(() => {
+      setLoad(1);
+    }, 5000);
+  },[])
   useEffect(() => {
     let one=(localStorage.getItem(1)+localStorage.getItem(2)+localStorage.getItem(3)+localStorage.getItem(4)+localStorage.getItem(5));
     let two=(localStorage.getItem(6)+localStorage.getItem(7)+localStorage.getItem(8)+localStorage.getItem(9));
@@ -202,8 +207,8 @@ function MovieRecommendation() {
 
   return (
     <div>
-    <div className='tip'>Below is the movie we recommend you should watch. Enjoy!</div>
-        {currmovie && movieData ? (
+    <div className='tip'>Below is the movie we recommend you to watch. Enjoy!</div>
+        {currmovie && movieData && load ? (
           <div className='recommended'>
             <div className='image'>
               <img src={imgsrc} />

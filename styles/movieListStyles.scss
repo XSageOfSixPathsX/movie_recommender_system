@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 
 *{
@@ -18,6 +18,13 @@
         border: 0.5px solid rgb(78, 76, 76);
     }
     
+}
+
+.load{
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    font-size: 40px;
+    padding-top: 120px;
 }
 
 .tip{
